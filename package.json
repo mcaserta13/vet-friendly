@@ -1,0 +1,17 @@
+{
+  "name": "vet-friendly",
+  "version": "1.0.0",
+  "description": "VetFriendly",
+  "main": "index.js",
+  "scripts": {
+    "start": "node loader.js"
+  },
+  "author": "Maurício Caserta",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.9",
+    "node-restful": "^0.2.6"
+  }
+}
