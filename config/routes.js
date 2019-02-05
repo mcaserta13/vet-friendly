@@ -2,6 +2,7 @@ const express = require('express')
 
 const clinicController = require('../app/controller/clinicController')
 const veterinaryController = require('../app/controller/veterinaryController')
+const petController = require('../app/controller/petController')
 
 module.exports = function(server) {
 
@@ -25,4 +26,10 @@ module.exports = function(server) {
 
     const imageService = require('../app/services/image/imageService')
     imageService.register(router, '/image')
+
+    const petService = require('../app/services/pet/petService')
+    petService.register(router, '/pet')
+
+    router.get('/pet', petController.get)
+    router.get('/pet/:id', petController.getById)
 }
