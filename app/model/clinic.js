@@ -2,14 +2,19 @@ const restful = require('node-restful')
 
 const mongoose = restful.mongoose
 
-const userSchema = new mongoose.Schema({
+const clinicSchema = new mongoose.Schema({
     name: { type: String, required: true },
+    phone: { type: String, required: true },
     email: { type: String, required: true },
+    address: { type: String },
+    city: { type: String },
+    state: { type: String },
+    country: { type: String },
+    image: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Image' }],
     active: { type: Boolean, required: true, default: true },
-    photo: { type: String },
     created: { type: Date, default: Date.now },
     updated: { type: Date },
     deleted: { type: Date }
 })
 
-module.exports = restful.model('User', userSchema)
+module.exports = restful.model('Clinic', clinicSchema)
