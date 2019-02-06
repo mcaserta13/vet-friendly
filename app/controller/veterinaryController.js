@@ -1,3 +1,8 @@
+/**
+ * @author Maurício Caserta
+ * 
+ * Controller para Veterinario
+ */
 const Veterinary = require('../model/veterinary')
 
 exports.get = function(req, res) {

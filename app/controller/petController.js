@@ -1,3 +1,8 @@
+/**
+ * @author Maurício Caserta
+ * 
+ * Controller para Pet
+ */
 const Pet = require('../model/pet')
 
 exports.get = function(req, res) {

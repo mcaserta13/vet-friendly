@@ -1,3 +1,8 @@
+/**
+ * @author Maurício Caserta
+ * 
+ * Model para Veterinario
+ */
 const restful = require('node-restful')
 
 const mongoose = restful.mongoose

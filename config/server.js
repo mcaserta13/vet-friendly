@@ -1,3 +1,8 @@
+/**
+ * @author Maurício Caserta
+ * 
+ * Classe para start do projeto
+ */
 const bodyParser = require('body-parser')
 const express = require('express')
 

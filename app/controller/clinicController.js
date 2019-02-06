@@ -1,3 +1,8 @@
+/**
+ * @author Maurício Caserta
+ * 
+ * Controller para Clinica
+ */
 const Clinic = require('../model/clinic')
 
 exports.get = function(req, res) {

@@ -1,3 +1,8 @@
+/**
+ * @author Maurício Caserta
+ * 
+ * Model para Pet
+ */
 const restful = require('node-restful')
 
 const mongoose = restful.mongoose

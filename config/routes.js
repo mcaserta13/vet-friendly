@@ -1,3 +1,8 @@
+/**
+ * @author Maurício Caserta
+ * 
+ * Serviço de roteamento da aplicação
+ */
 const express = require('express')
 
 const clinicController = require('../app/controller/clinicController')

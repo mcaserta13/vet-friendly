@@ -1,3 +1,8 @@
+/**
+ * @author Maurício Caserta
+ * 
+ * Model para Imagem
+ */
 const restful = require('node-restful')
 
 const mongoose = restful.mongoose
