@@ -4,21 +4,36 @@
  * Controller para Clinica
  */
 const Clinic = require('../model/clinic')
+require('../util/response')
 
 exports.get = function(req, res) {
-    Clinic.find({}, (err, data) => {
+    Clinic.find(activeQuery, (err, data) => {
         if(err){
-            res.send(err);
+            return res.status(500).send(err)
         }
-        res.json(data);
-    }).populate('image');
-};
+        
+        Clinic.countDocuments(activeQuery, function(err, count) {
+            if (err) {
+                return res.status(500).send(err)
+            }
+
+            res.status(200).json(
+                paginate(
+                    req.query.page,
+                    count, 
+                    data
+                )
+            )
+        })
+    }).skip((req.query.page -1) * pgOpt.limit)
+    .limit(pgOpt.limit).populate('image')
+}
 
 exports.getById = function(req, res) {
-    Clinic.findById(req.params.id, (err, data) => {
+    Clinic.findOne(activeById(req.params.id), (err, data) => {
         if(err){
-            res.send(err);
+            return res.status(500).send(err)
         }
-        res.json(data);
-    }).populate('image');
+        res.status(200).json(data)
+    }).populate('image')
 };
