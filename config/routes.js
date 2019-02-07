@@ -8,6 +8,8 @@ const express = require('express')
 const clinicController = require('../app/controller/clinicController')
 const veterinaryController = require('../app/controller/veterinaryController')
 const petController = require('../app/controller/petController')
+const chatChannelController = require('../app/controller/chatChannelController')
+const chatController = require('../app/controller/chatController')
 
 module.exports = function(server) {
 
@@ -37,4 +39,14 @@ module.exports = function(server) {
 
     router.get('/pet', petController.get)
     router.get('/pet/:id', petController.getById)
+
+    const chatChannelService = require('../app/services/chat/chatChannelService')
+    chatChannelService.register(router, '/chat/channel')
+
+    router.get('/chat/channel/:id', chatChannelController.getById)
+
+    const chatService = require('../app/services/chat/chatService')
+    chatService.register(router, '/chat')
+
+    router.get('/chat/:id', chatController.getById)
 }
