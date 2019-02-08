@@ -15,7 +15,7 @@ const clinicSchema = new mongoose.Schema({
     city: { type: String },
     state: { type: String },
     country: { type: String },
-    image: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Image' }],
+    media: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Media' }],
     active: { type: Boolean, required: true, default: true },
     created: { type: Date, default: Date.now },
     updated: { type: Date },

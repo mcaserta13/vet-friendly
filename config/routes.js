@@ -10,8 +10,11 @@ const veterinaryController = require('../app/controller/veterinaryController')
 const petController = require('../app/controller/petController')
 const chatChannelController = require('../app/controller/chatChannelController')
 const chatController = require('../app/controller/chatController')
+const petReportController = require('../app/controller/petReportController')
+const reportInboxController = require('../app/controller/reportInboxController')
+const reportItemController = require('../app/controller/reportItemController')
 
-module.exports = function(server) {
+module.exports = function (server) {
 
     const router = express.Router()
     server.use('/api', router)
@@ -31,8 +34,8 @@ module.exports = function(server) {
     router.get('/clinic', clinicController.get)
     router.get('/clinic/:id', clinicController.getById)
 
-    const imageService = require('../app/services/image/imageService')
-    imageService.register(router, '/image')
+    const mediaService = require('../app/services/media/mediaService')
+    mediaService.register(router, '/media')
 
     const petService = require('../app/services/pet/petService')
     petService.register(router, '/pet')
@@ -43,10 +46,30 @@ module.exports = function(server) {
     const chatChannelService = require('../app/services/chat/chatChannelService')
     chatChannelService.register(router, '/chat/channel')
 
+    router.get('/chat/channel', chatChannelController.get)
     router.get('/chat/channel/:id', chatChannelController.getById)
 
     const chatService = require('../app/services/chat/chatService')
     chatService.register(router, '/chat')
 
+    router.get('/chat', chatController.get)
     router.get('/chat/:id', chatController.getById)
+
+    const petReportService = require('../app/services/report/petReportService')
+    petReportService.register(router, '/report')
+
+    router.get('/report', petReportController.get)
+    router.get('/report/:id', petReportController.getById)
+
+    const reportItemService = require('../app/services/report/reportItemService')
+    reportItemService.register(router, '/report-item')
+
+    router.get('/report-item', reportItemController.get)
+    router.get('/report-item/:id', reportItemController.getById)
+
+    const reportInboxService = require('../app/services/report/reportInboxService')
+    reportInboxService.register(router, '/report-inbox')
+
+    router.get('/report-inbox', reportInboxController.get)
+    router.get('/report-inbox/:id', reportInboxController.getById)
 }

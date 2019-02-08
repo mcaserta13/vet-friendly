@@ -13,6 +13,7 @@ const petSchema = new mongoose.Schema({
     weight: { type: Number, required: true },
     breed: { type: String, required: true },
     age: { type: Number },
+    photo: { type: String },
     owner: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }],
     active: { type: Boolean, required: true, default: true },
     created: { type: Date, default: Date.now },

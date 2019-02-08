@@ -26,7 +26,7 @@ exports.get = function(req, res) {
             )
         })
     }).skip((req.query.page -1) * pgOpt.limit)
-    .limit(pgOpt.limit).populate('image')
+    .limit(pgOpt.limit).populate('media')
 }
 
 exports.getById = function(req, res) {
@@ -35,5 +35,5 @@ exports.getById = function(req, res) {
             return res.status(500).send(err)
         }
         res.status(200).json(data)
-    }).populate('image')
+    }).populate('media')
 };
