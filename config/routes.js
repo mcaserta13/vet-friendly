@@ -13,10 +13,22 @@ const chatController = require('../app/controller/chatController')
 const petReportController = require('../app/controller/petReportController')
 const reportInboxController = require('../app/controller/reportInboxController')
 const reportItemController = require('../app/controller/reportItemController')
+require('../app/middleware/authMiddleware')
 
 module.exports = function (server) {
 
     const router = express.Router()
+
+    server.use(function (req, res, next) {
+        res.setHeader("Access-Control-Allow-Origin", "*");
+        res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
+        res.setHeader("Access-Control-Max-Age", "3600");
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With, token");
+    
+        validateToken(req, res, next)
+    });
+
+    
     server.use('/api', router)
 
     const userService = require('../app/services/user/userService')

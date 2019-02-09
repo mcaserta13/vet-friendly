@@ -3,11 +3,12 @@ pgOpt = {
 }
 
 activeQuery = {
-    active: true
+    active: true,
+    deleted: null
 }
 
 activeById = function(id) {
-    return { active: true, _id: id}
+    return { active: true, _id: id, deleted: null}
 }
 
 paginate = function(page, totalItems, data) {
@@ -17,4 +18,4 @@ paginate = function(page, totalItems, data) {
         total_page: Math.ceil(totalItems / pgOpt.limit),
         data: data
     }
-};
+}

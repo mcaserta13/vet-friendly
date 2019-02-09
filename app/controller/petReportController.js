@@ -33,7 +33,7 @@ exports.get = function (req, res) {
                 path: 'owner',
                 model: 'User'
             }
-        }])
+        }]).populate('user')
 }
 
 exports.getById = function (req, res) {
@@ -48,5 +48,5 @@ exports.getById = function (req, res) {
             path: 'owner',
             model: 'User'
         }
-    }])
+    }]).populate('user')
 }
