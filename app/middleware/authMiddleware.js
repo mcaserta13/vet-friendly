@@ -20,15 +20,16 @@ validateToken = async function(req, res, next) {
     }
 
     // Consultar token
-    await AuthToken.find({ token: req.headers.token }, (err, data) => {
-        if (typeof data === 'undefined') {
+    await AuthToken.findOne({ token: req.headers.token }, (err, data) => {
+        if (typeof data === 'undefined' || err != null) {
             return res.status(401).send()
         }
 
         // Verificar se a data do token expirou
         if (data.expires < Date.now()) {
             // Gerar outro token
-            data.token = bcrypt.genSalt(20)
+            let salt = bcrypt.genSaltSync(10)
+            data.token = bcrypt.hashSync(Math.floor(new Date() / 1000).toString() + 'vet-friendly', salt)
             data.save()
         }
 

@@ -19,3 +19,23 @@ paginate = function(page, totalItems, data) {
         data: data
     }
 }
+
+// Erro interno
+httpServerError = function(res, err) {
+    return res.status(500).send(err)
+}
+
+// Requisição inválida
+httpBadRequest = function(res, err) {
+    return res.status(400).json({ message: err })
+}
+
+// Sucesso
+httpSuccess = function(res, data) {
+    res.status(200).json(data)
+}
+
+// Sucesso sem retorno
+httpSuccessEmpty = function(res) {
+    res.status(201).send()
+}

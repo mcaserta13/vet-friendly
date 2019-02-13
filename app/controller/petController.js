@@ -27,7 +27,7 @@ exports.get = function(req, res) {
         })
     }).skip((req.query.page -1) * pgOpt.limit)
     .limit(pgOpt.limit).populate('owner')
-};
+}
 
 exports.getById = function(req, res) {
     Pet.findOne(activeById(req.params.id), (err, data) => {
@@ -36,4 +36,4 @@ exports.getById = function(req, res) {
         }
         res.status(200).json(data)
     }).populate('owner')
-};
+}
