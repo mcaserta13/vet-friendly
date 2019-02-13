@@ -5,6 +5,7 @@
  */
 const AuthToken = require('../model/authToken')
 const bcrypt = require('bcrypt')
+require('../util/token')
 
 const authApi = 'auth'
 
@@ -28,8 +29,7 @@ validateToken = async function(req, res, next) {
         // Verificar se a data do token expirou
         if (data.expires < Date.now()) {
             // Gerar outro token
-            let salt = bcrypt.genSaltSync(10)
-            data.token = bcrypt.hashSync(Math.floor(new Date() / 1000).toString() + 'vet-friendly', salt)
+            data.token = generateAuthToken()
             data.save()
         }
 

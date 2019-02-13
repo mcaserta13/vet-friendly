@@ -6,6 +6,7 @@
 const AuthToken = require('../model/authToken')
 const User = require('../model/user')
 const bcrypt = require('bcrypt')
+require('../util/token')
 require('../util/response')
 
 exports.register = function (req, res) {
@@ -70,9 +71,7 @@ exports.login = function (req, res) {
                     }
 
                     // Gerar novo auth token
-                    let salt = bcrypt.genSaltSync(10)
-
-                    authToken.token = bcrypt.hashSync(Math.floor(new Date() / 1000).toString() + 'vet-friendly', salt)
+                    authToken.token = generateAuthToken()
                     authToken.save()
 
                     return httpSuccess(res, { user: user, token: authToken.token })
