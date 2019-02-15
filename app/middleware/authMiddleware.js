@@ -18,12 +18,12 @@ validateToken = async function (req, res, next) {
 
     // Token não enviado
     if (typeof req.headers['x-token'] === 'undefined') {
-        return httpUnauthorized(res)
+        return httpUnauthorized(req, res)
     } else {
         // Consultar token
         await AuthToken.findOne({ token: req.headers['x-token'] }, (err, data) => {
             if (data === null || err != null) {
-                return httpUnauthorized(res)
+                return httpUnauthorized(req, res)
             } else {
                 // Verificar se a data do token expirou
                 if (data.expires < Date.now()) {

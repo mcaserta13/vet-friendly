@@ -10,15 +10,15 @@ require('../util/response')
 exports.get = function (req, res) {
     Veterinary.find(activeQuery, (err, data) => {
         if (err) {
-            return res.status(500).send(err)
+            return httpServerError(req, res)
         }
 
         Veterinary.countDocuments(activeQuery, function (err, count) {
             if (err) {
-                return res.status(500).send(err)
+                return httpServerError(req, res)
             }
 
-            return httpSuccess(res, paginate(
+            return httpSuccess(req, res, paginate(
                 req.query.page,
                 count,
                 data
@@ -31,8 +31,8 @@ exports.get = function (req, res) {
 exports.getById = function (req, res) {
     Veterinary.findOne(activeById(req.params.id), (err, data) => {
         if (err) {
-            return res.status(500).send(err)
+            return httpServerError(req, res)
         }
-        res.status(200).json(data)
+        return httpSuccess(req, res, data)
     }).populate('clinic')
 }

@@ -1,3 +1,11 @@
+/**
+ * @author Maurício Caserta
+ * 
+ * Classe para controle de respostas da aplicação
+ * 
+ */
+require('../util/saveLog')
+
 pgOpt = {
     limit: 15
 }
@@ -21,26 +29,31 @@ paginate = function(page, totalItems, data) {
 }
 
 // Erro interno
-httpServerError = function(res, err) {
+httpServerError = function(req, res, err) {
+    saveReqLog(req, err, 500)
     return res.status(500).send(err)
 }
 
 // Requisição inválida
-httpBadRequest = function(res, err) {
+httpBadRequest = function(req, res, err) {
+    saveReqLog(req, err, 400)
     return res.status(400).json({ message: err })
 }
 
 // Sucesso
-httpSuccess = function(res, data) {
+httpSuccess = function(req, res, data) {
+    saveReqLog(req, data, 200)
     return res.status(200).json(data)
 }
 
 // Sucesso sem retorno
-httpSuccessEmpty = function(res) {
+httpSuccessEmpty = function(req, res) {
+    saveReqLog(req, {}, 201)
     return res.status(201).send()
 }
 
 // Não autorizado
-httpUnauthorized = function(res) {
+httpUnauthorized = function(req, res) {
+    saveReqLog(req, {}, 401)
     return res.status(401).send()
 }

@@ -10,21 +10,19 @@ require('../util/response')
 exports.get = function (req, res) {
     PetReport.find(activeQuery, (err, data) => {
         if (err) {
-            return res.status(500).send(err)
+            return httpServerError(req, res)
         }
 
         PetReport.countDocuments(activeQuery, function (err, count) {
             if (err) {
-                return res.status(500).send(err)
+                return httpServerError(req, res)
             }
 
-            res.status(200).json(
-                paginate(
-                    req.query.page,
-                    count,
-                    data
-                )
-            )
+            return httpSuccess(req, res, paginate(
+                req.query.page,
+                count,
+                data
+            ))
         })
     }).skip((req.query.page - 1) * pgOpt.limit)
         .limit(pgOpt.limit).populate([{
@@ -39,9 +37,9 @@ exports.get = function (req, res) {
 exports.getById = function (req, res) {
     PetReport.findOne(activeById(req.params.id), (err, data) => {
         if (err) {
-            return res.status(500).send(err)
+            return httpServerError(req, res)
         }
-        res.status(200).json(data)
+        return httpSuccess(req, res, data)
     }).populate([{
         path: 'pet',
         populate: {

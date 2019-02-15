@@ -13,21 +13,21 @@ exports.register = function (req, res) {
     let body = req.body
 
     if (typeof body.email === 'undefined') {
-        return httpBadRequest(res, 'Informe o e-mail')
+        return httpBadRequest(req, res, 'Informe o e-mail')
     }
 
     // Buscar usuário
     User.findOne({ email: body.email }, (err, data) => {
         if (data !== null || err !== null) {
-            return httpBadRequest(res, 'E-mail em uso')
+            return httpBadRequest(req, res, 'E-mail em uso')
         }
 
         if (typeof body.name === 'undefined') {
-            return httpBadRequest(res, 'Informe o nome')
+            return httpBadRequest(req, res, 'Informe o nome')
         }
 
         if (typeof body.password === 'undefined') {
-            return httpBadRequest(res, 'Informe a senha')
+            return httpBadRequest(req, res, 'Informe a senha')
         }
 
         var newUser = User()
@@ -39,10 +39,10 @@ exports.register = function (req, res) {
             newUser.password = hash
             newUser.save()
         } catch (error) {
-            return httpError(res, error)
+            return httpError(req, res, error)
         }
 
-        return httpSuccess(res, newUser)
+        return httpSuccess(req, res, newUser)
     })
 }
 
@@ -50,11 +50,11 @@ exports.login = function (req, res) {
     let body = req.body
 
     if (typeof body.email === 'undefined') {
-        return httpBadRequest(res, 'Informe o e-mail')
+        return httpBadRequest(req, res, 'Informe o e-mail')
     }
 
     if (typeof body.password === 'undefined') {
-        return httpBadRequest(res, 'Informe a senha')
+        return httpBadRequest(req, res, 'Informe a senha')
     }
 
     // Comparar o hash com a senha enviada
@@ -74,14 +74,14 @@ exports.login = function (req, res) {
                     authToken.token = generateAuthToken()
                     authToken.save()
 
-                    return httpSuccess(res, { user: user, token: authToken.token })
+                    return httpSuccess(req, res, { user: user, token: authToken.token })
                 })
 
             } else {
-                return httpBadRequest(res, 'Senha invalida')
+                return httpBadRequest(req, res, 'Senha invalida')
             }
         } else {
-            return httpBadRequest(res, 'E-mail invalido')
+            return httpBadRequest(req, res, 'E-mail invalido')
         }
     }).select("+password")
 }
