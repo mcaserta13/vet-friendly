@@ -24,7 +24,7 @@ module.exports = function (app) {
         res.setHeader("Access-Control-Allow-Origin", "*")
         res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE")
         res.setHeader("Access-Control-Max-Age", "3600")
-        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With, token")
+        res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With, X-Token")
     
         await validateToken(req, res, next)
     })

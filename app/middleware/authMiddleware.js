@@ -17,11 +17,11 @@ validateToken = async function (req, res, next) {
     }
 
     // Token não enviado
-    if (typeof req.headers.token === 'undefined') {
+    if (typeof req.headers['x-token'] === 'undefined') {
         return httpUnauthorized(res)
     } else {
         // Consultar token
-        await AuthToken.findOne({ token: req.headers.token }, (err, data) => {
+        await AuthToken.findOne({ token: req.headers['x-token'] }, (err, data) => {
             if (data === null || err != null) {
                 return httpUnauthorized(res)
             } else {
@@ -33,7 +33,7 @@ validateToken = async function (req, res, next) {
                     data.save()
 
                     // Setar token no header
-                    res.setHeader('token', data.token)
+                    res.setHeader('x-token', data.token)
                 }
 
                 req.user = data
