@@ -8,11 +8,15 @@ const bcrypt = require('bcrypt')
 require('../util/token')
 require('../util/response')
 
-const authApi = 'auth'
+// Apis que não precisam de autenticação
+const safeApis = [
+    '/api/auth/login', 
+    '/api/log'
+]
 
 validateToken = async function (req, res, next) {
     // Validar APIs publicas de autenticação
-    if (req.url.indexOf(authApi) > -1) {
+    if (safeApis.indexOf(req._parsedUrl.pathname) > -1) {
         return next()
     }
 

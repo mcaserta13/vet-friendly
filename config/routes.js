@@ -14,6 +14,7 @@ const petReportController = require('../app/controller/petReportController')
 const reportInboxController = require('../app/controller/reportInboxController')
 const reportItemController = require('../app/controller/reportItemController')
 const authController = require('../app/controller/authController')
+const logController = require('../app/controller/logController')
 require('../app/middleware/authMiddleware')
 
 module.exports = function (app) {
@@ -87,4 +88,6 @@ module.exports = function (app) {
 
     router.post('/auth/register', authController.register)
     router.post('/auth/login', authController.login)
+
+    router.get('/log', logController.get)
 }
