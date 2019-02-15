@@ -32,10 +32,15 @@ httpBadRequest = function(res, err) {
 
 // Sucesso
 httpSuccess = function(res, data) {
-    res.status(200).json(data)
+    return res.status(200).json(data)
 }
 
 // Sucesso sem retorno
 httpSuccessEmpty = function(res) {
-    res.status(201).send()
+    return res.status(201).send()
+}
+
+// Não autorizado
+httpUnauthorized = function(res) {
+    return res.status(401).send()
 }

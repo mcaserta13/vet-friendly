@@ -7,13 +7,13 @@ const bodyParser = require('body-parser')
 const express = require('express')
 
 const port = 4000
-const server = express()
+const app = express()
 
-server.use(bodyParser.urlencoded({ extended: true }))
-server.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
-server.listen(process.env.port || port, function () {
+app.listen(process.env.port || port, function () {
     console.log('Listening on')
 })
 
-module.exports = server
+module.exports = app

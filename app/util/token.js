@@ -5,3 +5,7 @@ generateAuthToken = function(){
 
     return bcrypt.hashSync(Math.floor(new Date() / 1000).toString() + 'vet-friendly', salt)
 }
+
+generateExpiresAt = function(){
+    return Date.now() + 14400000;
+}

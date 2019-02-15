@@ -16,21 +16,20 @@ const reportItemController = require('../app/controller/reportItemController')
 const authController = require('../app/controller/authController')
 require('../app/middleware/authMiddleware')
 
-module.exports = function (server) {
+module.exports = function (app) {
 
     const router = express.Router()
 
-    server.use(function (req, res, next) {
+    app.use(async function (req, res, next) {
         res.setHeader("Access-Control-Allow-Origin", "*")
         res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE")
         res.setHeader("Access-Control-Max-Age", "3600")
         res.setHeader("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With, token")
     
-        validateToken(req, res, next)
+        await validateToken(req, res, next)
     })
-
     
-    server.use('/api', router)
+    app.use('/api', router)
 
     const userService = require('../app/services/user/userService')
     userService.register(router, '/user')
